@@ -1,0 +1,32 @@
+name: small_habit_app
+description: 小さな習慣形成アプリ
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  sqflite: ^2.3.0
+  path_provider: ^2.1.1
+  provider: ^6.1.2
+  intl: ^0.18.0
+  shared_preferences: ^2.2.2  # 最新版がある場合はそれに置き換えてOK
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_launcher_icons: ^0.13.1
+
+flutter:
+  assets:
+    - assets/icon/app_image.png
+    - assets/icon/edit_icon.png
+    - assets/icon/delete_icon.png
+    -
+flutter_launcher_icons:
+  image_path: assets/icon/app_image.png
+  android: true
+  ios: true

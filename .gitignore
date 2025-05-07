@@ -1,0 +1,44 @@
+# Flutter/Dart specific
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/FlutterPluginRegistrant
+**/ios/Flutter/FlutterPluginRegistrant/Generated.xcconfig
+.flutter-plugins
+.flutter-plugins-dependencies
+.idea
+.dart_tool/
+.packages
+pubspec.lock
+
+# Android specific
+.android/
+build/
+*.iml
+
+# Xcode specific
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/.symlinks/
+ios/Flutter/.symlinks/
+
+# VS Code specific
+.vscode/
+
+# JetBrains specific
+.idea/
+
+# MacOS specific (if applicable)
+.macos/
+
+# Windows specific (if applicable)
+windows/
+
+# Linux specific (if applicable)
+linux/
+
+# Other
+*.log
+*.tmp
+*.swp
+.DS_Store
+*.stack-work/
