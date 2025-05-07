@@ -1,16 +1,35 @@
-# small_habit_app
+# 小さな習慣 - Habit Tracker App
 
-small_habit_app
+このアプリは、日々の小さな習慣を管理するための習慣トラッカーアプリです。タスクの進捗を追跡し、タスクの完了状況を管理することができます。
 
-## Getting Started
+## 主な機能
 
-This project is a starting point for a Flutter application.
+タスク追加: 新しい習慣を簡単に追加できます。
+期限設定: 各タスクに期限を設定し、進捗を追跡できます。
+完了タスク管理: 完了したタスクを表示・削除できます。
+通知機能: 設定した時間に通知を送信して、タスクを思い出させます。
+タスク自動削除: 完了後、設定された日数でタスクを自動削除できます。
+日々の進捗: 完了したタスクを記録し、日々の成果を振り返ることができます。
 
-A few resources to get you started if this is your first Flutter project:
+## ディレクトリ構成
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+以下のディレクトリ構成でプロジェクトが整理されています。
+small-habits-app/
+├── android/                  # Android関連の設定
+├── assets/                   # 画像、アイコンなど
+│   └── icons/                # アプリのアイコン
+├── lib/                      # Flutterコード
+│   ├── main.dart             # アプリのエントリーポイント
+│   ├── screens/              # 各画面のウィジェット
+│   ├── models/               # モデルクラス（Task など）
+│   ├── db/                   # データベース関連
+│   └── widgets/              # 再利用可能なウィジェット
+├── test/                     # テストコード
+├── pubspec.yaml              # パッケージ管理ファイル
+└── README.md                 # このファイル
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+使用技術
+Flutter: クロスプラットフォームのアプリケーション開発フレームワーク。
+SQLite: ローカルデータベース（タスクの保存）。
+Provider: 状態管理のためのFlutterパッケージ。
+intl: 日付と時刻のフォーマットに使用。
