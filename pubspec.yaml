@@ -1,5 +1,5 @@
 name: small_habit_app
-description: 小さな習慣形成アプリ
+description: 習慣アプリ
 
 version: 1.0.0+1
 
@@ -13,7 +13,8 @@ dependencies:
   path_provider: ^2.1.1
   provider: ^6.1.2
   intl: ^0.18.0
-  shared_preferences: ^2.2.2  # 最新版がある場合はそれに置き換えてOK
+  shared_preferences: ^2.2.2
+  google_mobile_ads: ^0.13.2+1 # 最新バージョンを指定
 
 dev_dependencies:
   flutter_test:

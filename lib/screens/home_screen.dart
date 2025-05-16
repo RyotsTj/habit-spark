@@ -4,6 +4,7 @@ import '../db/task_database.dart';
 import '../models/task.dart';
 import './settings_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart'; // 追加
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,10 +16,62 @@ class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _titleController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
 
+  // バナー広告関連の変数
+  BannerAd? _bannerAd;
+  bool _isBannerAdLoaded = false;
+
+  // テスト用の広告ユニットID
+  late final String _adUnitId; // 初期化は didChangeDependencies で行う
+
   @override
   void initState() {
     super.initState();
+    // _adUnitId の初期化は didChangeDependencies に移動
     _loadTasks();
+    // _loadBannerAd() は _adUnitId が初期化された後に行うため、
+    // didChangeDependencies に移動するか、_adUnitId の初期化後に呼び出す
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // context が利用可能になった後に _adUnitId を初期化
+    // テスト用ID
+    _adUnitId = Theme.of(context).platform == TargetPlatform.android
+        ? 'ca-app-pub-3940256099942544/6300978111'
+        : 'ca-app-pub-3940256099942544/2934735716'; //iphone用（仮）
+    // // 本番用ID
+    // _adUnitId = Theme.of(context).platform == TargetPlatform.android
+    //     ? 'ca-app-pub-3940256099942544/6300978111'
+    //     : 'ca-app-pub-3940256099942544/2934735716';//iphone用（仮）
+    // // _adUnitId が初期化された後にバナー広告をロード
+    _loadBannerAd();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd?.dispose();
+    super.dispose();
+  }
+
+  // バナー広告をロードする関数
+  void _loadBannerAd() { // 追加
+    _bannerAd = BannerAd(
+      adUnitId: _adUnitId,
+      request: AdRequest(),
+      size: AdSize.banner, // バナー広告のサイズを指定
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          setState(() {
+            _isBannerAdLoaded = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          _isBannerAdLoaded = false;
+          ad.dispose();
+        },
+      ),
+    )..load();
   }
 
   Future<void> _loadTasks() async {
@@ -187,7 +240,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 MaterialPageRoute(builder: (_) => SettingsScreen()),
               );
             },
-
           ),
         ],
       ),
@@ -233,6 +285,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
+      // バナー広告を表示する部分を追加
+      bottomNavigationBar: _isBannerAdLoaded && _bannerAd != null
+          ? Container(
+        alignment: Alignment.center,
+        width: _bannerAd!.size.width.toDouble(),
+        height: _bannerAd!.size.height.toDouble(),
+        child: AdWidget(ad: _bannerAd!),
+      )
+          : null, // 広告がロードされていない場合は何も表示しない
     );
   }
 }
